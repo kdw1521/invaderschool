@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@layer base {
+  :root{
+    --bg: 255 255 255; --fg: 15 23 42;
+    --muted: 100 116 139; --primary: 37 99 235; --primary-fg: 255 255 255;
+    --card: 248 250 252; --border: 226 232 240;
+  }
+  .dark{
+    --bg: 2 6 23; --fg: 226 232 240;
+    --muted: 148 163 184; --primary: 37 99 235; --primary-fg: 255 255 255;
+    --card: 15 23 42; --border: 30 41 59;
+  }
+  body{ @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))]; }
+}
