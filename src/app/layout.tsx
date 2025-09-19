@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -26,9 +27,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <span className="font-extrabold tracking-tight">Invader Portal</span>
             </div>
             <nav className="hidden sm:flex items-center gap-4 text-sm">
-              <a className="hover:opacity-80" href="/">대시보드</a>
-              <a className="hover:opacity-80" href="/login">로그인</a>
-              <a className="hover:opacity-80" href="/signup">회원가입</a>
+              <Link className="hover:opacity-80" href="/">대시보드</Link>
+              <Link className="hover:opacity-80" href="/login">로그인</Link>
+              <Link className="hover:opacity-80" href="/signup">회원가입</Link>
             </nav>
           </div>
         </header>
