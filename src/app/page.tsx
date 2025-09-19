@@ -1,103 +1,115 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <section className="mb-8">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">사내 대시보드</h1>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          오늘 업무 현황과 바로가기 메뉴입니다.
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* 카드: 업무 */}
+        <a
+          href="/tasks"
+          className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-5 hover:shadow-lg hover:shadow-slate-900/10 transition"
+        >
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold">업무(Task)</h2>
+            <span className="text-xs px-2 py-1 rounded-full bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-600/20">
+              바로가기
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            할일 등록, 진행중/완료 관리
+          </p>
+          <div className="mt-4 text-sm text-slate-500">오늘 등록 0 • 진행 0 • 완료 0</div>
+        </a>
+
+        {/* 카드: 조직/인원 */}
+        <a
+          href="/orgs"
+          className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-5 hover:shadow-lg hover:shadow-slate-900/10 transition"
+        >
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold">조직/멤버</h2>
+            <span className="text-xs px-2 py-1 rounded-full bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border border-emerald-600/20">
+              관리
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            조직 생성, 권한(Role) 설정
+          </p>
+          <div className="mt-4 text-sm text-slate-500">조직 1 • 멤버 1</div>
+        </a>
+
+        {/* 카드: 공지 */}
+        <a
+          href="/notices"
+          className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 p-5 hover:shadow-lg hover:shadow-slate-900/10 transition"
+        >
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold">공지/문서</h2>
+            <span className="text-xs px-2 py-1 rounded-full bg-amber-600/10 text-amber-600 dark:text-amber-400 border border-amber-600/20">
+              확인
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            사내 공지, 규정, 템플릿
+          </p>
+          <div className="mt-4 text-sm text-slate-500">미확인 0</div>
+        </a>
+      </section>
+
+      <section className="mt-10 grid gap-4 sm:grid-cols-2">
+        {/* 오늘 일정 */}
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-semibold">오늘 일정</h3>
+            <a href="/calendar" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+              전체 캘린더
+            </a>
+          </div>
+          <ul className="space-y-2 text-sm">
+            <li className="flex items-center justify-between">
+              <span className="text-slate-700 dark:text-slate-300">팀 스탠드업</span>
+              <span className="text-slate-500">09:30</span>
+            </li>
+            <li className="flex items-center justify-between">
+              <span className="text-slate-700 dark:text-slate-300">강의 운영 점검</span>
+              <span className="text-slate-500">14:00</span>
+            </li>
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* 빠른 작업 */}
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
+          <h3 className="font-semibold mb-3">빠른 작업</h3>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="/login"
+              className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700 transition"
+            >
+              로그인
+            </a>
+            <a
+              href="/signup"
+              className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 transition"
+            >
+              회원가입
+            </a>
+            <a
+              href="/logout"
+              className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700 transition"
+            >
+              로그아웃
+            </a>
+          </div>
+          <p className="mt-3 text-xs text-slate-500">
+            보호 페이지 접근 시 자동으로 로그인 확인이 수행됩니다.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
