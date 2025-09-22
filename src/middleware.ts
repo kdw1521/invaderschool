@@ -29,7 +29,7 @@ export async function middleware(req: NextRequest) {
   if (!user && !isPublic) {
     const loginUrl = new URL("/login", url);
     loginUrl.searchParams.set("next", url.pathname + url.search);
-    return NextResponse.redirect(loginUrl);
+    return NextResponse.redirect(loginUrl, { status: 303 });
   }
 
   // 로그인 사용자가 /login|/signup 접근 -> /
