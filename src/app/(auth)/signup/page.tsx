@@ -30,7 +30,7 @@ export default function SignUpPage() {
       password: pw,
       options: {
         // 이메일 확인 후 돌아올 주소(도메인에 맞게 수정)
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/login`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://invaderschool.vercel.app"}/login`,
       },
     });
     setLoading(false);
