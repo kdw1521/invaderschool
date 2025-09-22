@@ -100,12 +100,20 @@ export default function Home() {
             >
               회원가입
             </Link>
-            <Link
+            {/* <Link
               href="/api/auth/logout"
               className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700 transition"
             >
               로그아웃
-            </Link>
+            </Link> */}
+            <form action="/api/auth/logout" method="post">
+              <button
+                type="submit"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700 transition"
+              >
+                로그아웃
+              </button>
+            </form>
           </div>
           <p className="mt-3 text-xs text-slate-500">
             보호 페이지 접근 시 자동으로 로그인 확인이 수행됩니다.
