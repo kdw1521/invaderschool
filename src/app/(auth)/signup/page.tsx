@@ -35,19 +35,28 @@ export default function SignUpPage() {
     });
     setLoading(false);
 
-    if (error) return setErr(error.message);
+    if (error) {
+      if (error.code === "user_already_registered") {
+        // 이미 가입된 이메일
+        setErr(""); // 에러 대신 안내
+        setOk("이미 가입된 이메일입니다. 로그인하거나 비밀번호를 재설정하세요.");
+      } else {
+        setErr(error.message);
+      }
+      return;
+    }
 
     // 기본설정: 이메일 확인 필요 → 세션 없음
     if (!data.session) {
-      setOk("가입 메일을 보냈습니다. 받은 편지함에서 확인 후 로그인하세요.");
+      setOk("가입 메일을 보냈습니다. 받은 편지함을 확인하세요.");
     } else {
-      // 프로젝트가 auto-confirm이면 바로 세션 존재 → 홈으로
       location.href = "/";
     }
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center px-4">
+    // 헤더 높이(3.5rem)만큼 여백 주고, 화면 상단에 가깝게 배치
+    <div className="h-full flex items-start justify-center pt-16 md:pt-24 px-4">
       <div className="w-full max-w-md">
         <Card>
           <CardHeader>

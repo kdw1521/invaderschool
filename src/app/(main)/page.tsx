@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -86,24 +88,24 @@ export default function Home() {
         <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
           <h3 className="font-semibold mb-3">빠른 작업</h3>
           <div className="flex flex-wrap gap-2">
-            <a
+            <Link
               href="/login"
               className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700 transition"
             >
               로그인
-            </a>
-            <a
+            </Link>
+            <Link
               href="/signup"
               className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-slate-200 text-slate-900 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 transition"
             >
               회원가입
-            </a>
-            <a
-              href="/logout"
+            </Link>
+            <Link
+              href="/api/auth/logout"
               className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700 transition"
             >
               로그아웃
-            </a>
+            </Link>
           </div>
           <p className="mt-3 text-xs text-slate-500">
             보호 페이지 접근 시 자동으로 로그인 확인이 수행됩니다.
