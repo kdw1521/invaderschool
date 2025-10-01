@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,6 @@ export default function SignUpPage() {
       email,
       password: pw,
       options: {
-        // 이메일 확인 후 돌아올 주소(도메인에 맞게 수정)
         emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://invaderschool.vercel.app"}/login`,
       },
     });
@@ -37,68 +36,93 @@ export default function SignUpPage() {
 
     if (error) {
       if (error.code === "user_already_registered") {
-        // 이미 가입된 이메일
-        setErr(""); // 에러 대신 안내
+        setErr("");
         setOk("이미 가입된 이메일입니다. 로그인하거나 비밀번호를 재설정하세요.");
-      } else {
-        setErr(error.message);
-      }
+      } else setErr(error.message);
       return;
     }
 
-    // 기본설정: 이메일 확인 필요 → 세션 없음
-    if (!data.session) {
-      setOk("가입 메일을 보냈습니다. 받은 편지함을 확인하세요.");
-    } else {
-      location.href = "/";
-    }
+    if (!data.session) setOk("가입 메일을 보냈습니다. 받은 편지함을 확인하세요.");
+    else location.href = "/";
   };
 
   return (
-    // 헤더 높이(3.5rem)만큼 여백 주고, 화면 상단에 가깝게 배치
-    <div className="h-full flex items-start justify-center pt-16 md:pt-24 px-4">
-      <div className="w-full max-w-md">
-        <Card>
-          <CardHeader>
-            <CardTitle>회원가입</CardTitle>
-            <CardDescription>회사 이메일로 계정을 만듭니다.</CardDescription>
-          </CardHeader>
+    <div className="h-full flex items-start justify-center pt-16 md:pt-20 px-4">
+      <div className="w-full max-w-sm">
+        {/* 헤더 */}
+        <div className="mb-5">
+          <h1 className="text-xl font-extrabold tracking-tight">회원가입</h1>
+          <p className="mt-1 text-sm text-muted-foreground">회사 이메일로 계정을 만듭니다.</p>
+        </div>
 
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="email">이메일</Label>
-              <Input id="email" type="email" inputMode="email" autoComplete="email"
-                     placeholder="name@company.com" value={email}
-                     onChange={e=>setEmail(e.target.value)} required />
+        {/* 폼 컨테이너 */}
+        <div className="rounded-xl border p-5">
+          <form onSubmit={onSubmit} className="space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-[13px] text-muted-foreground">이메일</Label>
+              <Input
+                id="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                placeholder="name@company.com"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
+                className="h-10"
+                required
+              />
             </div>
 
-            <div>
-              <Label htmlFor="pw">비밀번호</Label>
-              <Input id="pw" type="password" autoComplete="new-password"
-                     placeholder="최소 8자" value={pw}
-                     onChange={e=>setPw(e.target.value)} required />
-              <p className="mt-1 text-xs text-slate-500">영문/숫자 조합 권장, 최소 {minLen}자</p>
+            <div className="space-y-2">
+              <Label htmlFor="pw" className="text-[13px] text-muted-foreground">비밀번호</Label>
+              <Input
+                id="pw"
+                type="password"
+                autoComplete="new-password"
+                placeholder={`최소 ${minLen}자`}
+                value={pw}
+                onChange={(e)=>setPw(e.target.value)}
+                className="h-10"
+                required
+              />
+              <p className="text-xs text-muted-foreground">
+                영문/숫자 조합 권장, 최소 {minLen}자
+              </p>
             </div>
 
-            <div>
-              <Label htmlFor="pw2">비밀번호 확인</Label>
-              <Input id="pw2" type="password" autoComplete="new-password"
-                     placeholder="다시 입력" value={pw2}
-                     onChange={e=>setPw2(e.target.value)} required />
+            <div className="space-y-2">
+              <Label htmlFor="pw2" className="text-[13px] text-muted-foreground">비밀번호 확인</Label>
+              <Input
+                id="pw2"
+                type="password"
+                autoComplete="new-password"
+                placeholder="다시 입력"
+                value={pw2}
+                onChange={(e)=>setPw2(e.target.value)}
+                className="h-10"
+                required
+              />
             </div>
 
             {err && <Alert>{err}</Alert>}
-            {ok && <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600 dark:text-emerald-300">{ok}</div>}
+            {ok && (
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-600 dark:text-emerald-300">
+                {ok}
+              </div>
+            )}
 
-            <Button type="submit" disabled={loading} className="w-full">
+            <Button type="submit" disabled={loading} className="w-full h-10">
               {loading && <Spinner />} 회원가입
             </Button>
 
-            <div className="text-sm text-slate-500 dark:text-slate-400 text-center">
-              이미 계정이 있나요? <a href="/login" className="underline hover:opacity-80">로그인</a>
-            </div>
+            <p className="text-center text-sm text-muted-foreground">
+              이미 계정이 있나요?{" "}
+              <Link href="/login" className="underline hover:opacity-80">
+                로그인
+              </Link>
+            </p>
           </form>
-        </Card>
+        </div>
       </div>
     </div>
   );

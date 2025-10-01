@@ -12,7 +12,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <nav className="hidden sm:flex items-center gap-4 text-sm">
             <Link className="hover:opacity-80" href="/login">로그인</Link>
             <Link className="hover:opacity-80" href="/signup">회원가입</Link>
-            <Link className="hover:opacity-80" href="/">대시보드</Link>
           </nav>
         </div>
       </header>

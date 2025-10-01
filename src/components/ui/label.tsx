@@ -1,18 +1,24 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+"use client"
 
-// interface → type으로 교체(빈 인터페이스 규칙 회피)
-export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
 
-export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className, children, ...props }, ref) => (
-    <label
-      ref={ref}
-      className={cn("mb-1 block text-sm text-slate-600 dark:text-slate-300", className)}
+import { cn } from "@/lib/utils"
+
+function Label({
+  className,
+  ...props
+}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+  return (
+    <LabelPrimitive.Root
+      data-slot="label"
+      className={cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      )}
       {...props}
-    >
-      {children}
-    </label>
+    />
   )
-);
-Label.displayName = "Label";
+}
+
+export { Label }
