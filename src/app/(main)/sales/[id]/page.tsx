@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { link } from "fs";
 import Link from "next/link";
 import { Copyable } from "@/components/ui/copyable";
 

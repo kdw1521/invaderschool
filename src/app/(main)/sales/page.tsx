@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SalesAPI, type SalesSet } from "@/modules/sales/api";
-import { TeachersAPI, CohortsAPI } from "@/modules/teachers/api";
+import { TeachersAPI } from "@/modules/teachers/api";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
@@ -19,8 +19,6 @@ function useDebounce<T>(value: T, delay = 500) {
 }
 
 export default function SalesSheetIndex() {
-  const qc = useQueryClient();
-
   // 소스
   const teachersQ = useQuery({ queryKey: ["teachers"], queryFn: TeachersAPI.list });
 
